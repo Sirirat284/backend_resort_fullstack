@@ -4,7 +4,7 @@ const port = process.env.PORT || 3000;
 const helmet = require('helmet');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
-
+const db = require('./db/connection.js');
 
 app.use(helmet());
 app.use(cors());
