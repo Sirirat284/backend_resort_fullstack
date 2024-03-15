@@ -131,3 +131,5 @@ dist
 
 .env
 .package-lock.json
+.script.txt
+.scriptdb.sql
