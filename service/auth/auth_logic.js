@@ -5,6 +5,7 @@ const { PluginAuth } = require('./auth_plugin.js');
 class LogicAuth {
     constructor() {
         this.User = model.User
+        this.Customer = model.Customer;
         this.pluginAuth = new PluginAuth();
     }
     getLastUserId() {
@@ -32,12 +33,39 @@ class LogicAuth {
             });
         });
     }
+    getLastCustomerId() {
+        return new Promise((resolve, reject) => {
+            let sql = "SELECT custID FROM Customers ORDER BY custID DESC LIMIT 1;";
+            connection.query(sql, function(err, result) {
+                if (err) {
+                    console.log(err);
+                    reject(err);
+                } else {
+                    if (result.length > 0) {
+                        // ตรวจสอบที่นี่ว่าคุณกำลังเข้าถึงฟิลด์ที่ถูกต้อง
+                        const textPart = result[0].custID.match(/[a-zA-Z]+/g)?.join('') || '';
+                        const numberPart = result[0].custID.match(/\d+/g)?.join('') || '';
+                        const newNum = parseInt(numberPart, 10) + 1;
+                        const newUser = textPart + newNum;
+                        resolve(newUser); 
+                    } else {
+                        const textPart = "cust";
+                        const numberPart = 1;
+                        const newUser = textPart + numberPart;
+                        resolve(newUser);
+                    }
+                }
+            });
+        });
+    } 
 
-    async registerUser(model, res) {
+    async registerUser(User,Customer, res) {
         try {
             const lastUserId = await this.getLastUserId();
-            model.userID = lastUserId ; 
-            this.pluginAuth.registerPlugin(model, res);
+            User.userID = lastUserId ; 
+            const lastCustId = await this.getLastCustomerId();
+            Customer.custID = lastCustId ; 
+            this.pluginAuth.registerPlugin(User,Customer, res);
 
         } catch (error) {
             console.log('Error in registerLogin:', error);
