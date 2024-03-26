@@ -9,4 +9,6 @@ router.post('/register', endpointAuth.registerEndpoint);
 
 router.post('/login', endpointAuth.loginEndpoint);
 
+router.post('/registerAdmin');
+
 module.exports = router;
