@@ -6,9 +6,11 @@ const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 const db = require('./db/connection.js');
 const authRouter = require('./routers/auth-router.js');
+const bodyParser = require('body-parser');
 
 app.use(express.json());
 
+app.use(bodyParser.json());
 
 app.use(helmet());
 app.use(cors());

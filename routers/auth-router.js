@@ -9,6 +9,8 @@ router.post('/register', endpointAuth.registerEndpoint);
 
 router.post('/login', endpointAuth.loginEndpoint);
 
-router.post('/registerAdmin');
+router.post('/registerAdmin' , endpointAuth.registerAdminEndpoint);
+
+router.post('/loginAdmin' , endpointAuth.loginadminEndpoint)
 
 module.exports = router;

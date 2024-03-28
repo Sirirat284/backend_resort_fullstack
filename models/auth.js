@@ -14,5 +14,21 @@ module.exports = {
         Tel:"",
         Email:"",
         job:""
+    },
+    Admin:{
+        AdID:"",
+        AdminName:"",
+        Password:"",
+        Status:"",
+        Role:""
+    },
+    AdminInfo:{
+        AdminID:"",
+        AdID:"",
+        ID_Card:"",
+        encryptedData:"",
+        Full_Name:"",
+        Tel:"",
+        Email:""
     }
 }

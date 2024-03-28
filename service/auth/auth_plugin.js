@@ -73,6 +73,80 @@ class PluginAuth {
             }
         )
     }
+
+
+    registerAdminPlugin = (Admin , AdminInfo , res) => {
+        let checkAdminnameSql = "SELECT Adminname FROM Admin WHERE Adminname = ?";
+        connection.query(checkAdminnameSql, [Admin.Adminname], (err, result) => {
+            if (err) {
+                return res.status(500).json({ message: "Error checking email" });
+            }
+            if (result.length > 0) {
+                return res.status(409).json({ message: "Email already registered" });
+            } else {
+                let AdminSql = "INSERT INTO Admin (AdID ,Adminname, Password, status, Role) VALUES (?, ?, ?, ?, ?);"
+                connection.query(AdminSql, [Admin.AdID, Admin.AdminName, Admin.Password, 'Inactive', Admin.Role], (err, data) => {
+                    if (err) { 
+                        return res.status(401).json({ message: "Unable to complete user registration 1" });
+                    } else {
+                        // ทำการเพิ่มข้อมูลในตาราง Customers ที่นี่
+                        let AdmininfoSql = "INSERT INTO Admininfo (AdminID, AdID, encryptedData, Full_name, Tel, Email) VALUES (?, ?, ?, ?, ?, ?);"
+                        // สมมติว่าคุณมีข้อมูลเหล่านี้ใน model แล้ว
+                        connection.query(AdmininfoSql, [AdminInfo.AdminID, AdminInfo.AdID, AdminInfo.encryptedData, AdminInfo.Full_Name, AdminInfo.Tel, AdminInfo.Email], (err, customerData) => {
+                            if (err) {
+                                return res.status(401).json({ message: "Unable to complete customer registration 2" });
+                            } else {
+                                res.status(201).json({ message: "Register successfully" });
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    } 
+
+    loginAdminPugin = (Admin , res) => {
+        let sql = "SELECT AdID , Adminname, Password, status, Role FROM Admin WHERE Adminname = ?"
+        connection.query(
+            sql, [Admin.AdminName],
+        async function(err ,data) {
+                if(err) {  return res.status(401).json({ message: "can't connect db" }); }
+                // console.log(data)
+                else if(data.length > 0){
+                    const passwordMatch = await bcrypt.compare(Admin.Password, data[0].Password);
+                    if (!passwordMatch) {
+                        return res
+                                    .status(401)
+                                    .json({ message: "Username or Password incorrect" });
+                    }else {
+                        console.log(data)
+                        const token = jwt.sign({    AdID: data[0].AdID,
+                                                    AdminName:data[0].Adminname,
+                                                    role: data[0].Role
+                                                    }, secretKey, {
+                        expiresIn: "1h",
+                        });
+                        
+                        let updateSql = "UPDATE Admin SET status = ? WHERE AdID = ?";
+                            connection.query(updateSql, ['Active', data[0].AdID], function(err, updateResults) {
+                                if (err) {
+                                    // Log the error but don't fail the entire login process
+                                    console.log('Error updating user status:', err);
+                                }
+
+                                console.log(token); // แสดง token ใน console
+                                return res.status(200).json({ token }); // ส่ง token กลับไปยังผู้ใช้
+                            });              
+                    }
+                }
+                else{
+                    return res
+                        .status(401)
+                        .json({ message: "Username or Password incorrect" });
+                }
+            }
+        )
+    }
 }
 
 module.exports = {
