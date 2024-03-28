@@ -6,6 +6,8 @@ const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 const db = require('./db/connection.js');
 const authRouter = require('./routers/auth-router.js');
+const userRouter = require('./routers/user-router.js');
+
 
 app.use(express.json());
 
@@ -18,6 +20,8 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 app.use(authRouter);
+app.use(userRouter);
+
 
 
 app.get('/', (req, res) => {

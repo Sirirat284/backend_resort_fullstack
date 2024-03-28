@@ -11,7 +11,7 @@ class EndpointAuth {
         this.logicAuth = new LogicAuth();
     }
     
-    registerEndpoint = async (req, res) =>{
+    registerEndpoint = async(req, res) =>{
         this.User.Email =  req.body.email;
         const password = req.body.password;
         const salt = await bcrypt.genSalt(10);
