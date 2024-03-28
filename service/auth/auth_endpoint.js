@@ -17,7 +17,6 @@ class EndpointAuth {
     }
     
     registerEndpoint = async (req, res) =>{
-        console.log(req)
         this.User.Email =  req.body.email;
         const password = req.body.password;
         const salt = await bcrypt.genSalt(10);

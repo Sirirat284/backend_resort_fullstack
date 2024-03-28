@@ -13,4 +13,5 @@ router.post('/registerAdmin' , endpointAuth.registerAdminEndpoint);
 
 router.post('/loginAdmin' , endpointAuth.loginadminEndpoint)
 
+
 module.exports = router;
