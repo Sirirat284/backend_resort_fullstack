@@ -1,0 +1,35 @@
+module.exports = {
+    User: {
+        userID:"",
+        Email:"",
+        Password:"",
+        ip:""
+    },
+    Customer:{
+        custID:"",
+        custName:"",
+        address:"",
+        subdirect:"",
+        direct:"",
+        province:"",
+        Tel:"",
+        Email:"",
+        job:""
+    },
+    Admin:{
+        AdID:"",
+        AdminName:"",
+        Password:"",
+        Status:"",
+        Role:""
+    },
+    AdminInfo:{
+        AdminID:"",
+        AdID:"",
+        ID_Card:"",
+        encryptedData:"",
+        Full_Name:"",
+        Tel:"",
+        Email:""
+    }
+}
