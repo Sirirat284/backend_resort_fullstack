@@ -11,4 +11,10 @@ router.get('/monitorRoom' , endpointAdmin.monitorRoomEndpoint);
 
 router.get('/updateStatusRoom', endpointAdmin.updataStatusRoomEndpoint)
 
+router.get('/monitornewreserve', endpointAdmin.monitornewreserveEndpoint)
+
+router.post('/deleteadmin', endpointAdmin.deleteadminEndpoint);
+
+router.post('/updateResevesStatus', endpointAdmin.updateResevesStatusEndpoint)
+
 module.exports = router;

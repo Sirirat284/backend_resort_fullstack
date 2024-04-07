@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "nimble-gate-419112",
+  "private_key_id": "57d4e79f40e8c70a09ee32b5965a22fd55d1578d",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDI6PtLQ1tp5mde\nqO1o97x/DEfx6LiuknmFq1FRbjyym8wPwBYuhVwdppDLd0H0NaaGjw8ZYfSZNh8t\nMsMkfoBChOpMEF+O23d9q7C3hgTTAFyMjzh1LIfEVlK7euKJHR09v/DyF6Z2tRge\n51GOUG3secnbI1Q0Wk92g4sFSITt/0JPy4JMfCTBUFjMrqZXHybD7qux7hCuYF/L\nUuBsXiSfisPJyj9t6zWyO1tOMvn9WZjTd9hFOe7P94LbH6QOJw1K0xmRmx2P+Ed/\nb0vZTT9szXnhz38JHvfEjtpqReY8OLGe/pHDpeqnJnB5szpGsFVRm4SuOPhsBkVo\n4O/TKF9lAgMBAAECggEAAV5o++HJGScbNC9lcq4haCIuyUyjGXlg/5KjurDMFBFw\nqfjOjeGVt5P/b4tv9Rh6enc2DJ+4uWR/gODUKIb+G7XpHLyN0hzXqxEE4rM0jDV3\n6/M72LyFbkaCSMm1Cmca4GVS4Gtd1Hg2YluEGDqfDRnlUKtkcvjcirupsk8ErNRp\nyaRPND2iNraC/uwHoeu/2wM4/Omo3qlzBwJw2szWaiv/aeQwSTI8Ehz70BoYk815\nEBqVo6POAjn1SaWQmBZZIRISCUMYrboh9jvRzb0CVbUO5gq6j6QNkO/XPngB7Feg\ngqC1nhT8YYzZwRnOQ34LDFPENzdQtj1NBZqVAginLwKBgQDi6OdfCcj0qnEW7SsR\n1QYBwK3D27qnQkZNIpdxlXJ6IgK9yJDUPDBL/nLH9VCtm3I6tkA1XBX81gqAWD1x\nJed0BI4YvrP9nL/oJ44ksYMRxVtiOdWEvxTiufnduPBbC8N93+Y+qEXqyiL3SXn9\nHL93NIeRIKf1dDM7nR81f8uwqwKBgQDiqsb8Pn4t4kgPdNtFahXVKsUP5LyRFeqp\nwo0R0aZ0TbT7diDzJNFoNnnIVTWeJIbV5mDHMI3t8er+uW+thDt2D2Z7ncrHLquB\n0iDF8JGpX41ECIM8TI3VZ83ud9rouy3nobpxCmbmnYaYdrYFF2r3s7AqB/Vji72s\nrnTVx6jQLwKBgQDIvPaDM2reWDK375Ucr3Ii9sxC6w6TjaQX9TQ5PdcKiTAXqWnG\n+IBZmn78ut9m1pAVtMnU6uRgyxJ7PJUOllPOZYE4Du24vYVg4i1z9L5ZaFlR6owk\nZc8aTSDpsASi5yNJJlzQrZk8/xoz3oLXEymnUYdlMpikIup4IKZNdANFBQKBgFTY\nwGujqO/cCEVg5MNzFoEY5XMxmDRnE9Q/8zZ8V+apP9nxOhxJ5+kumx+WZd+wpJhl\nCE0Hq9kp+WEoYNl+6hMjaKVVR5aPrbuGwKXXi27vSZ3x4c4sidscZEWjr9n2VxSh\nwXyW/DXPOZbQuQnm3i+in4rcN8rvgCynkSyE9HgZAoGBAKXAXs7FJ9k543fhyIKD\nG04RAkiONLuEmbrAXhKmVAZiEh/Gp4+h7HKXxrrLFPocfz0G+HFkw6YPUVDwOqg4\nxbx8nTHHwMzi1c846pDPF+Ah18VJNulZu2CppT09CO26AZ0bs5sL8Ai/TVQjNrEM\nJBYDNfdhkD8kqs27k12XkUeL\n-----END PRIVATE KEY-----\n",
+  "client_email": "fullstack-baanrimnam@nimble-gate-419112.iam.gserviceaccount.com",
+  "client_id": "106066902656289704475",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/fullstack-baanrimnam%40nimble-gate-419112.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

@@ -2,34 +2,14 @@ const connection = require('../../db/connection.js');
 const  model  = require('../../models/auth.js');
 require("dotenv").config();
 const { PluginAuth } = require('./auth_plugin.js');
-
-const crypto = require('crypto');
-
-const algorithm = process.env.ALGORITHM_CRYPTO;
-const key = Buffer.from(process.env.KEY_CRYPTO, 'utf8');
-const iv = Buffer.from(process.env.IV_CRYPTO, 'utf8');
-
-const encrypt = (text) => {
-    let cipher = crypto.createCipheriv(algorithm, Buffer.from(key), iv);
-    let encrypted = cipher.update(text);
-    encrypted = Buffer.concat([encrypted, cipher.final()]);
-    return { iv: iv.toString('hex'), encryptedData: encrypted.toString('hex') };
-};
-
-const decrypt = (ivv , encryptedData) =>{
-    let iv = Buffer.from(ivv, 'hex');
-    let encryptedText = Buffer.from(encryptedData, 'hex');
-    let decipher = crypto.createDecipheriv(algorithm, Buffer.from(key), iv);
-    let decrypted = decipher.update(encryptedText);
-    decrypted = Buffer.concat([decrypted, decipher.final()]);
-    return decrypted.toString();
-  }
+const { Encrypt } = require('../units/encryption.js')
 
 class LogicAuth {
     constructor() {
         this.User = model.User
         this.Customer = model.Customer;
         this.pluginAuth = new PluginAuth();
+        this.encrypt = new Encrypt();
     }
     getLastUserId() {
         return new Promise((resolve, reject) => {
@@ -86,6 +66,8 @@ class LogicAuth {
         try {
             const lastUserId = await this.getLastUserId();
             User.userID = lastUserId ; 
+            const uuID =  this.encrypt.encrypt(lastUserId); 
+            User.uuID = uuID.encryptedData
             const lastCustId = await this.getLastCustomerId();
             Customer.custID = lastCustId ; 
             this.pluginAuth.registerPlugin(User,Customer, res);
@@ -152,7 +134,7 @@ class LogicAuth {
     } 
 
     registerAdmin = async(Admin , AdminInfo , res) => {
-        const enIDcard = encrypt(AdminInfo.ID_Card);
+        const enIDcard = this.encrypt.encrypt(AdminInfo.ID_Card);
         AdminInfo.encryptedData = enIDcard.encryptedData;
 
         try {
@@ -174,6 +156,44 @@ class LogicAuth {
 
     logoutAdmin = (Admin , res) => {
         this.pluginAuth.logoutAdminPlugin(Admin,res)
+    }
+    
+    findUserByEmail(email){
+        return new Promise((resolve, reject) => {
+          const sql = "SELECT * FROM Users WHERE Email LIKE ?";
+          connection.query(sql, [email], (err, results) => {
+            if (err) {
+              return reject(err);
+            }
+            resolve(results);
+          });
+        });
+      };
+
+      googleAutheLogic = async(User,Customer, res) => {
+        try {
+            const email = User.Email;
+            const user = await this.findUserByEmail(email);
+            if (Array.isArray(user) && user.length === 0) {
+              const newUserId = await this.getLastUserId();
+              const newCustomerId = await this.getLastCustomerId();
+              User.userID = newUserId ; 
+              const uuID =  this.encrypt.encrypt(newUserId); 
+              User.uuID = uuID.encryptedData
+              Customer.custID = newCustomerId ; 
+            
+              console.log(User)
+              console.log(Customer)
+
+              this.pluginAuth.googleAutheRegisterPlugin(User,Customer, res);
+            
+            } else {
+                this.pluginAuth.googleAutheLoginPlugin(User,Customer, res)
+            }
+          } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: "An error occurred.", error: error.message });
+          }
     }
 }
 

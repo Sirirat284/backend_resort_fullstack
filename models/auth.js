@@ -1,6 +1,7 @@
 module.exports = {
     User: {
         userID:"",
+        uuID:"",
         Email:"",
         Password:"",
         ip:""

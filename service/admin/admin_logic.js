@@ -12,7 +12,18 @@ class LogicAdmin {
         this.pluginAdmin.monitorRoomPlugin(res);
     }
     updataStatusRoomLogic = (ResortRoom , res) => {
-        this.pluginAdmin.updataStatusRoomPlugin(ResortRoom , res)
+        this.pluginAdmin.updataStatusRoomPlugin(ResortRoom , res);
+    }
+
+    monitornewreserveLogic = (res) =>{
+        this.pluginAdmin.monitornewreservePlugin(res);
+    }
+    deleteadminLogic = (adminid , res) => {
+        this.pluginAdmin.deleteadminPlugin(adminid , res);
+    }
+
+    updateResevesStatusLogic = (headID , status , res) => {
+        this.pluginAdmin.updateResevesStatusPlugin(headID , status , res);
     }
 }
 

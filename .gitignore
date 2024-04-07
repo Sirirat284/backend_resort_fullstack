@@ -133,3 +133,4 @@ dist
 package-lock.json
 script.txt
 scriptdb.sql
+.dockerignore
