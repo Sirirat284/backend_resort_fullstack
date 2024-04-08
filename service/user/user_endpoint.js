@@ -8,6 +8,8 @@ class EndpointUser{
     }
 
     checkAvailableRoomlEndpoint = (req, res) => {
+	    console.log("green");
+	    console.log(req.query);
         // console.log (req)
         const { roomTypeID, checkInDate, checkOutDate } = req.query;
         this.logicUser.checkAvailableRoomlogic({ roomTypeID, checkInDate, checkOutDate }, res);

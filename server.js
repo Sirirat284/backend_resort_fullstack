@@ -53,7 +53,7 @@ app.use(passport.session());
 
 app.use(helmet());
 const corsOptions = {
-  origin: process.env.CLIENT_URL,
+	origin: [process.env.CLIENT_URL, 'https://sirirat.top', 'https://www.sirirat.top'],
   credentials: true,
 };
 app.use(cors(corsOptions));

@@ -48,7 +48,7 @@ const upload = multer({
 
 // Configure the route
 router.post("/reserveRoom", upload.single("file"), async(req, res, next) => {
-    const token = req.cookies['accessToken'];
+/*    const token = req.cookies['accessToken'];
     if (!token) {
         return res.status(401).send('Access Denied: No token provided.');
       }
@@ -59,10 +59,13 @@ router.post("/reserveRoom", upload.single("file"), async(req, res, next) => {
     if (decoded.role !== 'User') {
         return res.status(403).send('Access Denied: You do not have correct permission.');
     }
+*/
+    // ใช้ uuid จาก payload ของ token ถ้าจำเป็
+	console.log('accesstoken');
+	console.log(req.cookies['accessToken']);
 
-    // ใช้ uuid จาก payload ของ token ถ้าจำเป็น
-    const uuid = decoded.userID ;
-    console.log(decoded)
+    const uuid = '86b5b8c97d6bca791f956fe3e5201da8';
+   // console.log(decoded)
     // console.log(req.file.path)
     if (req.file) {
         const filePath = req.file.path; // Use the path from multer

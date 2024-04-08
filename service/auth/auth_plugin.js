@@ -194,9 +194,21 @@ class PluginAuth {
                 console.log(accessToken);
                 console.log(refreshToken);
 
-                res.cookie('accessToken', accessToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 900000 });
-                res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 604800000 });
-                res.redirect(`${process.env.CLIENT_URL}/`);
+                res.cookie('accessToken', accessToken, {
+  httpOnly: true,
+  path: '/',
+  sameSite: 'Lax',
+  maxAge: 900000 // 15 minutes
+});
+
+res.cookie('refreshToken', refreshToken, {
+  httpOnly: true,
+  path: '/',
+  sameSite: 'Lax',
+  maxAge: 604800000 // 7 days
+});
+		    res.redirect(`${process.env.CLIENT_URL}/`);
+
 
             } else {
                 // ไม่พบอีเมล์ในฐานข้อมูล
@@ -227,9 +239,19 @@ class PluginAuth {
                             const refreshToken = jwt.sign({ userID: User.uuID, role: 'User' }, process.env.REFRESH_SECRET_KEY , {
                                 expiresIn: "7d",
                             });
-    
-                            res.cookie('accessToken', accessToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 900000 });
-                            res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 604800000 });
+				res.cookie('accessToken', accessToken, {
+  httpOnly: true,
+  path: '/',
+  sameSite: 'Lax',
+  maxAge: 900000 // 15 minutes
+});
+
+    res.cookie('refreshToken', refreshToken, {
+  httpOnly: true,
+  path: '/',
+  sameSite: 'Lax',
+  maxAge: 604800000 // 7 days
+});
                             res.redirect(`${process.env.CLIENT_URL}/`);
                         } catch (jwtError) {
                             console.error(jwtError);
