@@ -196,8 +196,10 @@ class PluginAuth {
 
                 res.cookie('accessToken', accessToken, {
   httpOnly: true,
-  path: '/',
-  sameSite: 'Lax',
+  //secure: true,
+domain: '.sirirat.top',			
+  //sameSite: 'None',
+sameSite: 'Lax',
   maxAge: 900000 // 15 minutes
 });
 
@@ -207,8 +209,7 @@ res.cookie('refreshToken', refreshToken, {
   sameSite: 'Lax',
   maxAge: 604800000 // 7 days
 });
-		    res.redirect(`${process.env.CLIENT_URL}/`);
-
+		    res.redirect(`https://ns1.sirirat.top/`);
 
             } else {
                 // ไม่พบอีเมล์ในฐานข้อมูล
@@ -219,11 +220,9 @@ res.cookie('refreshToken', refreshToken, {
     googleAutheRegisterPlugin = (User,Customer, res) => {
         let userSql = "INSERT INTO Users (userID , uuID, Email, Role) VALUES (?, ?, ?, 'User');"
         connection.execute(userSql, [User.userID, User.uuID, User.Email], (err, data) => {
-            if (err) { 
+            if (err) {
                 console.log(err)
                 return res.status(401).json({ message: "Unable to complete user registration" });
-            } else {
-                // ทำการเพิ่มข้อมูลในตาราง Customers ที่นี่
                 let customerSql = "INSERT INTO Customers (custID, userID, Email, custName) VALUES (?, ?, ?, ?);"
                 // สมมติว่าคุณมีข้อมูลเหล่านี้ใน model แล้ว
                 connection.execute(customerSql, [Customer.custID, User.userID, User.Email, Customer.custName], (err, customerData) => {
@@ -239,9 +238,10 @@ res.cookie('refreshToken', refreshToken, {
                             const refreshToken = jwt.sign({ userID: User.uuID, role: 'User' }, process.env.REFRESH_SECRET_KEY , {
                                 expiresIn: "7d",
                             });
-				res.cookie('accessToken', accessToken, {
+res.cookie('accessToken', accessToken, {
   httpOnly: true,
-  path: '/',
+  //secure: true,
+domain: '.sirirat.top',
   sameSite: 'Lax',
   maxAge: 900000 // 15 minutes
 });
@@ -252,7 +252,7 @@ res.cookie('refreshToken', refreshToken, {
   sameSite: 'Lax',
   maxAge: 604800000 // 7 days
 });
-                            res.redirect(`${process.env.CLIENT_URL}/`);
+                            res.redirect(`https://ns1.sirirat.top/`);
                         } catch (jwtError) {
                             console.error(jwtError);
                             return res.status(500).json({ message: "JWT creation failed" });

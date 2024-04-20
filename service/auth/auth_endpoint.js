@@ -44,7 +44,7 @@ class EndpointAuth {
     }
 
     registerAdminEndpoint = async (req , res) => {
-/*        const token = req.cookies['accessToken'];
+        const token = req.cookies['accessToken'];
         if (!token) {
             return res.status(401).send('Access Denied: No token provided.');
           }
@@ -55,7 +55,7 @@ class EndpointAuth {
         if (decoded.role !== 'SuperAdmin') {
             return res.status(403).send('Access Denied: You do not have correct permission.');
         }
-*/
+
         console.log(req.body)
         this.Admin.AdminName = req.body.AdminName;
         const password = req.body.Password;
