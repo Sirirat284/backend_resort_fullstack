@@ -1,4 +1,7 @@
-# อธิบาย Backend ของ Web application บ้านริมน้ำรีสอร์ท
+# Webapplication Baanrimnam resort คืออะไร?
+เป็น Webapp สำหรับการ Booking บ้านพักของรีสอร์ท โดยมีฟังก์ชั่นการทำงานทั่วไปเช่น sign in & sign up , booking , payment โดยจะมีทั้งหมด 2 สิทธิ์ใหญ่คือ Admin และ Customer 
+
+## อธิบาย Backend ของ Web application บ้านริมน้ำรีสอร์ท
 
 เป็นส่วนที่ไว้สำหรับประมวลผลและเชื่อมต่อกับฐานข้อมูล โดยจะมีส่วนที่เชื่อมต่อ API ของ Frontend เพื่อรับหรือส่งข้อมูลมาประมวลผล
 
